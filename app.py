@@ -12,7 +12,10 @@ def fetch_poster(movie_id):
     return "http://image.tmdb.org/t/p/w500/" + data['poster_path']
 
 
-similarity = pickle.load(open('similarity.pkl','rb'))
+import gzip
+
+with gzip.open('similarity_compressed.pkl.gz', 'rb') as f:
+    similarity = pickle.load(f)
 
 def recommend(movie):
     movie_index = movies[movies['title'] == movie].index[0]
